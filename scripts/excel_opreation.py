@@ -13,12 +13,29 @@ class Operate_Excel:
         """返回excel对象"""
         try:
             return openpyxl.load_workbook(self.__file)
+
         except Exception as e:
             raise e
 
-    def getSheetogjcet(self):
+    def getSheetobjcet(self,sheetname):
         try:
-            return
+            return openpyxl.load_workbook(self.__file)[sheetname]
+        except Exception as e:
+            raise e
+
+    def getCellogject(self, sheetobject, cellname, row=None, column=None):
+        try:
+            if cellname:
+                return sheetobject[cellname]
+            elif not cellname and row and column:
+                return sheetobject.cell(row, column)
+            else:
+                raise "Cell's row or column is wrong"
+        except Exception as e:
+            raise e
+
+
+
 
 
 
@@ -26,3 +43,5 @@ class Operate_Excel:
 print('hahah')
 file = Operate_Excel('C:/workspace/api_auto_test/api_auto_test/data','api.xlsx')
 print(file.getExcelobject())
+print(file.getSheetobjcet('登录'))
+
