@@ -34,6 +34,17 @@ class Operate_Excel:
         except Exception as e:
             raise e
 
+    def getCellvalue(self, sheetobject, cellname, row=None, column=None):
+        try:
+            if cellname:
+                return sheetobject[cellname].value
+            elif not cellname and row and column:
+                return sheetobject.cell(row, column).value
+            else:
+                raise "Cell's row or column is wrong"
+        except Exception as e:
+            raise e
+
 
 
 
